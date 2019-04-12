@@ -77,7 +77,7 @@ export const changeAuthToken = token => dispatch => {
     dispatch({type: ACTIONS.CHANGE_AUTH_TOKEN, payload: token})
 }
 
-export const changeUserGroups = (authToken, userId) => async dispatch => {
+export const fetchUserGroups = (authToken, userId) => async dispatch => {
     getUserGroups(authToken, userId).then(res => {
         const groups = res.data.response.items;
         console.log("new groups: ", groups);
@@ -85,7 +85,7 @@ export const changeUserGroups = (authToken, userId) => async dispatch => {
     });
 }
 
-export const changeUserFriends = (authToken, userId) => async dispatch => {
+export const fetchUserFriends = (authToken, userId) => async dispatch => {
     getUserFriends(authToken, userId).then(res => {
         const friends = res.data.response.items;
         console.log("new friends: ", friends);

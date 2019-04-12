@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react';
 import {Tabs, TabsItem, HorizontalScroll, PanelHeader, FixedLayout} from '@vkontakte/vkui';
 import {connect as ReactConnect} from 'react-redux';
 
-import {changeUserGroups, changeUserFriends} from '../Main/reducer';
+import {fetchUserGroups, fetchUserFriends} from '../Main/reducer';
 import UserGroupsList from '../../Containers/UserGroupsList';
 import UserFriendsList from '../../Containers/UserFriendsList';
 
@@ -11,8 +11,8 @@ const MainPanel = (props) => {
     const {
         changeView,
         changePanel,
-        changeUserGroups,
-        changeUserFriends,
+        fetchUserGroups,
+        fetchUserFriends,
         userGroups,
         userFriends,
         fetchedUser,
@@ -22,8 +22,8 @@ const MainPanel = (props) => {
         setActiveTab] = useState('groups');
 
     if (fetchedUser && authToken && userGroups.length === 0) {
-        changeUserGroups(authToken, fetchedUser.id);
-        changeUserFriends(authToken, fetchedUser.id);
+        fetchUserGroups(authToken, fetchedUser.id);
+        fetchUserFriends(authToken, fetchedUser.id);
     }
 
     const renderTab = tab => {
@@ -79,7 +79,7 @@ const MainPanel = (props) => {
 
 const mapStateToProps = state => state.main
 const mapDispatchToProps = {
-    changeUserGroups,
-    changeUserFriends
+    fetchUserGroups,
+    fetchUserFriends
 }
 export default ReactConnect(mapStateToProps, mapDispatchToProps)(MainPanel);
